@@ -4,7 +4,7 @@
 <html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>CodePen - Strikethrough hover-effect</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="../register/home/style.css">
 
 </head>

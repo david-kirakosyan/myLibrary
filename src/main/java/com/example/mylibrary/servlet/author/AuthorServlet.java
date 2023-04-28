@@ -21,8 +21,9 @@ public class AuthorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Author> author = authorStorage.getAllByAuthor();
-        req.setAttribute("authors",author);
+        String name = req.getParameter("name");
+        List<Author> authors = authorStorage.getAuthors(name);
+        req.setAttribute("authors",authors);
         req.getRequestDispatcher("WEB-INF/authors.jsp").forward(req,resp);
     }
 }

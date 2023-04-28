@@ -1,18 +1,23 @@
 <%@ page import="com.example.mylibrary.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en" >
 <head>
-    <title>Home Page</title>
-    <link rel="alternate" href="../home.css">
+    <meta charset="UTF-8">
+    <title>CodePen - Strikethrough hover-effect</title>
+    <link rel="stylesheet" href="../register/home/style.css">
+
 </head>
 <body>
+<!-- partial:index.partial.html -->
+<div class="back"></div>
 <% User user = (User) session.getAttribute("user"); %>
 Welcome <%=user.getName()%> <%=user.getSurname()%>
 <nav>
-    <a href="/authors">AUTHORS</a>
+    <a href="/authors">Authors</a>
     <a href="/books">Books</a>
     <a href="/logout">Logout</a>
-    <div id="indicator"></div>
 </nav>
+
 </body>
 </html>

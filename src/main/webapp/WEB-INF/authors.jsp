@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Responsive HTML Table With Pure CSS - Web Design/UI Design</title>
+    <title>Author</title>
     <link rel="stylesheet" href="../register/tables/author.css">
 </head>
 <% List<Author> authors = (List<Author>) request.getAttribute("authors");
@@ -19,10 +19,10 @@
     <section class="table__header">
         <a href="/">Back</a>
         <h1>Authors</h1> <a href="/createAuthor">Create Author</a>
-        <div class="input-group">
-            <input type="search" placeholder="Search Data...">
-            <img src="../register/tables/images/search.png" alt="">
-        </div>
+            <form action="/authors" method="get" id="search-books" class="input-group">
+                <input type="search" name="name" placeholder="Search Data...">
+                <img onclick="document.getElementById('search-books').submit()" src="../register/tables/images/search.png" alt="">
+            </form>
         <div class="export__file">
             <label for="export-file" class="export__file-btn" title="Export File"></label>
             <input type="checkbox" id="export-file">

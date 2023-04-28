@@ -10,7 +10,7 @@ public interface AuthorStorage {
     List<Author> getAllByAuthor();
 
     Author getById(int id);
-
+    List<Author> getAuthors(String name);
     void editAuthor(Author author);
 
     void removeById(int id);

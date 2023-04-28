@@ -3,6 +3,7 @@ package com.example.mylibrary.manager.impl;
 import com.example.mylibrary.db.DBConnectionProvider;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.model.Author;
+import com.example.mylibrary.model.Book;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -44,7 +45,30 @@ public class AuthorStorageImpl implements AuthorStorage {
         }
         return authorList;
     }
+    @Override
+    public List<Author> getAuthors(String name) {
+        List<Author> authorList = new ArrayList<>();
+        String sql = "SELECT * FROM my_library.author";
+        boolean hasTitle = name != null && name != "";
 
+        if (hasTitle) {
+            sql += " WHERE name LIKE CONCAT( '%',?,'%')";
+        }
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            if (hasTitle) {
+                preparedStatement.setString(1, name);
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                authorList.add(getAuthorFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return authorList;
+    }
     @Override
     public Author getById(int id) {
         String sql = "SELECT * FROM my_library.author WHERE id=?";

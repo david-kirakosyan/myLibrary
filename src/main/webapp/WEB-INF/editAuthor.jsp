@@ -28,8 +28,7 @@
         <div class="row align-items-stretch justify-content-center no-gutters">
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
-                    <a href="/companies">Back</a>
-                    <h3 class="text-center">Edit Author</h3>
+                    <a href="/authors">Back</a>  <h3 class="text-center">Edit Author</h3>
                     <form class="mb-5" action="/editAuthor" method="post">
                         <input type="hidden" name="id" value="<%=author.getId()%>">
                         <div class="row">

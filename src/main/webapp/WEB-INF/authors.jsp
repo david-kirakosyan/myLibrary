@@ -17,7 +17,7 @@
 <body>
 <main class="table">
     <section class="table__header">
-        <a href="/">Back</a>
+        <a href="/home">Back</a>
         <h1>Authors</h1> <a href="/createAuthor">Create Author</a>
             <form action="/authors" method="get" id="search-books" class="input-group">
                 <input type="search" name="name" placeholder="Search Data...">

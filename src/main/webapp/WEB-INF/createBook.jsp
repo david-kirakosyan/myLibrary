@@ -29,7 +29,7 @@
         <div class="row align-items-stretch justify-content-center no-gutters">
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
-                    <h3 class="text-center">Add Book</h3>
+                    <a href="/books">Back</a>  <h3 class="text-center">Add Book</h3>
                     <form class="mb-5" action="/createBook" method="post">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">

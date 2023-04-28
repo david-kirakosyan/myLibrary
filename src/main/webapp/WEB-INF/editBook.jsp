@@ -30,7 +30,7 @@
         <div class="row align-items-stretch justify-content-center no-gutters">
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
-                    <h3 class="text-center">Edit Book</h3>
+                    <a href="/books">Back</a>   <h3 class="text-center">Edit Book</h3>
                     <form class="mb-5" action="/editBook" method="post">
                         <input type="hidden" name="id" value="<%=book.getId()%>">
                         <div class="row">

@@ -26,7 +26,7 @@
         <div class="row align-items-stretch justify-content-center no-gutters">
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
-                    <h3 class="text-center">Add Author</h3>
+                    <a href="/authors">Back</a>  <h3 class="text-center">Add Author</h3>
                     <form class="mb-5" action="/createAuthor" method="post">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">

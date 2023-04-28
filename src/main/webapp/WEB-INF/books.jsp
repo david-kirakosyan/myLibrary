@@ -26,14 +26,6 @@
         <div class="export__file">
             <label for="export-file" class="export__file-btn" title="Export File"></label>
             <input type="checkbox" id="export-file">
-            <div class="export__file-options">
-                <label>Export As &nbsp; &#10140;</label>
-                <label for="export-file" id="toPDF">PDF <img src="../register/tables/images/pdf.png" alt=""></label>
-                <label for="export-file" id="toJSON">JSON <img src="../register/tables/images/json.png" alt=""></label>
-                <label for="export-file" id="toCSV">CSV <img src="../register/tables/images/csv.png" alt=""></label>
-                <label for="export-file" id="toEXCEL">EXCEL <img src="../register/tables/images/excel.png"
-                                                                 alt=""></label>
-            </div>
         </div>
     </section>
     <section class="table__body">
@@ -58,7 +50,7 @@
                 <td><%=book.getPrice()%></td>
                 <td><%=book.getAuthor().getName()%></td>
                 <td>
-                    <a class="status delivered" href="/removeBook?id=<%=book.getId()%>">Delete</a>
+                    <a class="status cancelled" href="/removeBook?id=<%=book.getId()%>">Delete</a>
                     <a class="status delivered" href="/editBook?id=<%=book.getId()%>">Edit</a>
                 </td>
             </tr>

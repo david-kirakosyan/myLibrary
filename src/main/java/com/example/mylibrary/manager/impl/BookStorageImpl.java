@@ -109,7 +109,7 @@ public class BookStorageImpl implements BookStorage {
         String sql = "DELETE FROM my_library.book WHERE id=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

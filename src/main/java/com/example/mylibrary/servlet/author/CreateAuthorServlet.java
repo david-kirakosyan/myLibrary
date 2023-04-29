@@ -4,6 +4,7 @@ package com.example.mylibrary.servlet.author;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.manager.impl.AuthorStorageImpl;
 import com.example.mylibrary.model.Author;
+import com.example.mylibrary.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,12 +26,16 @@ public class CreateAuthorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        authorStorage.saveAuthor(Author.builder()
-                .name(req.getParameter("name"))
-                .surname(req.getParameter("surname"))
-                .email(req.getParameter("email"))
-                .age(Integer.parseInt(req.getParameter("age")))
-                .build());
+        String email = req.getParameter("email");
+        Author author = authorStorage.getByEmail(email);
+        if (author == null) {
+            authorStorage.saveAuthor(Author.builder()
+                    .name(req.getParameter("name"))
+                    .surname(req.getParameter("surname"))
+                    .email(email)
+                    .age(Integer.parseInt(req.getParameter("age")))
+                    .build());
+        }
         resp.sendRedirect("/authors");
 
     }

@@ -3,6 +3,7 @@ package com.example.mylibrary.servlet.author;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.manager.impl.AuthorStorageImpl;
 import com.example.mylibrary.model.Author;
+import com.example.mylibrary.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,13 +27,17 @@ public class EditAuthorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String email = req.getParameter("email");
+        Author author = authorStorage.getByEmail(email);
+        if (author == null) {
             authorStorage.editAuthor(Author.builder()
                     .id(Integer.parseInt(req.getParameter("id")))
                     .name(req.getParameter("name"))
                     .surname(req.getParameter("surname"))
-                    .email(req.getParameter("email"))
+                    .email(email)
                     .age(Integer.parseInt(req.getParameter("age")))
                     .build());
+        }
             resp.sendRedirect("/authors");
         }
     }

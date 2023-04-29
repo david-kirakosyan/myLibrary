@@ -4,6 +4,7 @@ import com.example.mylibrary.db.DBConnectionProvider;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.model.Author;
 import com.example.mylibrary.model.Book;
+import com.example.mylibrary.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,6 +30,21 @@ public class AuthorStorageImpl implements AuthorStorage {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Author getByEmail(String email) {
+        String sql = "SELECT * FROM author WHERE email=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                return getAuthorFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

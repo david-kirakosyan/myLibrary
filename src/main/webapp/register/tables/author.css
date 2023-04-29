@@ -1,6 +1,6 @@
 body {
     min-height: 100vh;
-    background: url(html_table.jpg) center / cover;
+    background: url("images/img.jpg") center / cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -224,14 +224,14 @@ thead th.active,tbody td.active {
     position: relative;
 }
 
-.export__file .export__file-btn {
-    display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    background: #fff6 url(export.png) center / 80% no-repeat;
-    border-radius: 50%;
-    transition: .2s ease-in-out;
-}
+/*.export__file .export__file-btn {*/
+/*    display: inline-block;*/
+/*    width: 2rem;*/
+/*    height: 2rem;*/
+/*    background: #fff6 url(export.png) center / 80% no-repeat;*/
+/*    border-radius: 50%;*/
+/*    transition: .2s ease-in-out;*/
+/*}*/
 
 .export__file .export__file-btn:hover { 
     background-color: #fff;

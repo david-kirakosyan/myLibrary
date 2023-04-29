@@ -77,12 +77,5 @@
 
 </div>
 
-
-<script src="../register/add/js/jquery-3.3.1.min.js"></script>
-<script src="../register/add/js/popper.min.js"></script>
-<script src="../register/add/js/bootstrap.min.js"></script>
-<script src="../register/add/js/jquery.validate.min.js"></script>
-<script src="../register/add/js/main.js"></script>
-
 </body>
 </html>

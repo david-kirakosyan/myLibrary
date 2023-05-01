@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @WebServlet("/getImage")
-public class GetImageServlet extends HttpServlet {
+public class GetImageByAuthorServlet extends HttpServlet {
 
 
     @Override
@@ -22,7 +22,7 @@ public class GetImageServlet extends HttpServlet {
         String picName = req.getParameter("picName");
 
         // reads input file from an absolute path
-        File imageFile = new File(SharedConstants.UPLOAD_FOLDER + picName);
+        File imageFile = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR + picName);
         if (imageFile.exists()) {
             try (FileInputStream inStream = new FileInputStream(imageFile)) {
                 // modifies response

@@ -27,7 +27,7 @@
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
                     <a href="/authors">Back</a>  <h3 class="text-center">Add Author</h3>
-                    <form class="mb-5" action="/createAuthor" method="post">
+                    <form class="mb-5" action="/createAuthor" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
                                 <label for="name" class="col-form-label">Name</label>
@@ -46,6 +46,10 @@
                                 <label for="age" class="col-form-label">Age</label>
                                 <input type="number" class="form-control" name="age" id="age"
                                        placeholder="Your Age">
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="pic_name" class="col-form-label">Image</label>
+                                <input type="file" class="form-control" name="profilePic" id="pic_name">
                             </div>
                         </div>
                         <div class="row justify-content-center">

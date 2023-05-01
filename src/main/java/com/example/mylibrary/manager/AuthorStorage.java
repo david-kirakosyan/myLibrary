@@ -10,9 +10,10 @@ public interface AuthorStorage {
     List<Author> getAllByAuthor();
 
     Author getById(int id);
-    List<Author> getAuthors(String name);
 
     Author getByEmail(String email);
+
+    List<Author> search(String keyword);
     void editAuthor(Author author);
 
     void removeById(int id);

@@ -64,29 +64,21 @@ public class BookStorageImpl implements BookStorage {
         return null;
     }
 
-    @Override
-    public List<Book> getBooks(String title) {
-        List<Book> bookList = new ArrayList<>();
-        String sql = "SELECT * FROM my_library.book";
-        boolean hasTitle = title != null && title != "";
-
-        if (hasTitle) {
-            sql += " WHERE title LIKE CONCAT( '%',?,'%')";
-        }
-
+    public List<Book> search(String keyword) {
+        List<Book> employeeList = new ArrayList<>();
+        String sql = "SELECT * FROM book WHERE title LIKE  ? OR  description LIKE ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            if (hasTitle) {
-                preparedStatement.setString(1, title);
-            }
-
+            keyword = "%" + keyword + "%";
+            preparedStatement.setString(1, keyword);
+            preparedStatement.setString(2, keyword);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                bookList.add(getBookFromResultSet(resultSet));
+                employeeList.add(getBookFromResultSet(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return bookList;
+        return employeeList;
     }
 
     @Override

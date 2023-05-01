@@ -1,6 +1,4 @@
-<%@ page import="com.example.mylibrary.model.Author" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.mylibrary.model.User" %>
 <%@ page import="com.example.mylibrary.model.Book" %>
 <!DOCTYPE html>
 <html lang="en" title="Coding design">
@@ -13,6 +11,9 @@
     <link rel="stylesheet" href="../register/tables/author.css">
 </head>
 <% List<Book> books = (List<Book>) request.getAttribute("book");
+    String keyword = request.getParameter("keyword") == null || request.getParameter("keyword").equals("null")
+            ? "" : request.getParameter("keyword");
+%>
 %>
 <body>
 <main class="table">
@@ -20,7 +21,7 @@
         <a href="/home">Back</a>
         <h1>Books</h1> <a href="/createBook">Create Book</a>
         <form action="/books" method="get" id="search-books" class="input-group">
-            <input type="search" name="title" placeholder="Search Data...">
+            <input type="search" name="keyword" placeholder="Search Data..." value="<%=keyword%>">
             <img onclick="document.getElementById('search-books').submit()" src="../register/tables/images/search.png" alt="">
         </form>
         <div class="export__file">

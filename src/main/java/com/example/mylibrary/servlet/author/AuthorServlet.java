@@ -21,9 +21,14 @@ public class AuthorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        List<Author> authors = authorStorage.getAuthors(name);
-        req.setAttribute("authors",authors);
-        req.getRequestDispatcher("WEB-INF/authors.jsp").forward(req,resp);
+        String keyword = req.getParameter("keyword");
+        List<Author> authors = null;
+        if (keyword == null || keyword.equals("")) {
+            authors = authorStorage.getAllByAuthor();
+        } else {
+            authors = authorStorage.search(keyword);
+        }
+        req.setAttribute("authors", authors);
+        req.getRequestDispatcher("WEB-INF/authors.jsp").forward(req, resp);
     }
 }

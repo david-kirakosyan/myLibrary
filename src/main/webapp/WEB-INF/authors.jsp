@@ -13,15 +13,17 @@
 </head>
 <% List<Author> authors = (List<Author>) request.getAttribute("authors");
     User user = (User) session.getAttribute("user");
+    String keyword = request.getParameter("keyword") == null || request.getParameter("keyword").equals("null")
+    ? "" : request.getParameter("keyword");
 %>
 <body>
 <main class="table">
     <section class="table__header">
         <a href="/home">Back</a>
         <h1>Authors</h1> <a href="/createAuthor">Create Author</a>
-            <form action="/authors" method="get" id="search-books" class="input-group">
-                <input type="search" name="name" placeholder="Search Data...">
-                <img onclick="document.getElementById('search-books').submit()" src="../register/tables/images/search.png" alt="">
+            <form action="/authors" method="get" id="search-authors" class="input-group">
+                <input type="search" name="keyword" placeholder="Search Data..." value="<%=keyword%>">
+                <img onclick="document.getElementById('search-authors').submit()"  src="../register/tables/images/search.png" alt="">
             </form>
         <div class="export__file">
             <label for="export-file" class="export__file-btn" title="Export File"></label>
@@ -33,6 +35,7 @@
             <thead>
             <tr>
                 <th>Id</th>
+                <th>image</th>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Email</th>
@@ -44,7 +47,15 @@
             <% if (authors != null && !authors.isEmpty()) {%>
             <% for (Author author : authors) { %>
             <tr>
+
                 <td><%=author.getId()%></td>
+                <td>
+                    <% if (author.getPicName() == null || author.getPicName().equalsIgnoreCase("null")) { %>
+                    <img src="../register/images/difault.jpg" alt="">
+                    <%} else {%>
+                    <a href="/getImage?picName=<%=author.getPicName()%>"><img
+                            src="/getImage?picName=<%=author.getPicName()%>" width="100"> </a></td>
+                <%}%>
                 <td><%=author.getName()%></td>
                 <td> <%=author.getSurname()%></td>
                 <td><%=author.getEmail()%></td>

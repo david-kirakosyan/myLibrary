@@ -1,18 +1,26 @@
 package com.example.mylibrary.servlet.author;
 
+import com.example.mylibrary.constants.SharedConstants;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.manager.impl.AuthorStorageImpl;
 import com.example.mylibrary.model.Author;
-import com.example.mylibrary.model.User;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
 
 @WebServlet("/editAuthor")
+@MultipartConfig(
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 10,
+        fileSizeThreshold = 1024 * 1024
+)
 public class EditAuthorServlet extends HttpServlet {
 
     private AuthorStorage authorStorage = new AuthorStorageImpl();
@@ -27,18 +35,31 @@ public class EditAuthorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        Author author = authorStorage.getByEmail(email);
-        if (author == null) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        Author byId = authorStorage.getById(id);
+        if (byId != null){
+            if (byId.getPicName() != null || byId.getPicName().equalsIgnoreCase("null")){
+                File file = new File(SharedConstants.UPLOAD_FOLDER+byId.getPicName());
+                if (file.exists()){
+                    file.delete();
+                }
+            }
+        }
+        Part profilePicPart = req.getPart("profilePic");
+        String picName = null;
+        if (profilePicPart != null && profilePicPart.getSize() > 0) {
+            picName = System.nanoTime() + "_" + profilePicPart.getSubmittedFileName();
+            profilePicPart.write(SharedConstants.UPLOAD_FOLDER + picName);
+        }
             authorStorage.editAuthor(Author.builder()
                     .id(Integer.parseInt(req.getParameter("id")))
                     .name(req.getParameter("name"))
                     .surname(req.getParameter("surname"))
-                    .email(email)
+                    .email(req.getParameter("email"))
                     .age(Integer.parseInt(req.getParameter("age")))
+                    .picName(picName)
                     .build());
-        }
-            resp.sendRedirect("/authors");
-        }
+        resp.sendRedirect("/authors");
     }
+}
 

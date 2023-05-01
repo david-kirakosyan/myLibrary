@@ -11,7 +11,7 @@ public interface BookStorage {
 
     Book getById(int id);
 
-    List<Book> getBooks(String title);
+    List<Book> search(String keyword);
 
     void editBook(Book book);
 

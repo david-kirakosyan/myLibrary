@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @WebServlet("/getImage")
-public class GetImageServlet extends HttpServlet {
+public class GetImageByAuthorServlet extends HttpServlet {
 
 
     @Override

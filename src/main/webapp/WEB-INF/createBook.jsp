@@ -1,6 +1,7 @@
 <%@ page import="com.example.mylibrary.model.Book" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.mylibrary.model.Author" %>
+<%@ page import="com.example.mylibrary.model.User" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +22,10 @@
     <title>Add Book</title>
 </head>
 <body>
-<% List<Author> authors = (List<Author>) request.getAttribute("author"); %>
+<% List<Author> authors = (List<Author>) request.getAttribute("author");
+List<User> users = (List<User>) request.getAttribute("user");
+List<Book> books = (List<Book>) request.getAttribute("book");
+%>
 
 <div class="content">
 
@@ -30,7 +34,7 @@
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
                     <a href="/books">Back</a>  <h3 class="text-center">Add Book</h3>
-                    <form class="mb-5" action="/createBook" method="post">
+                    <form class="mb-5" action="/createBook" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
                                 <label for="title" class="col-form-label">Title</label>
@@ -52,6 +56,15 @@
                                     <option value="<%=author.getId()%>"><%=author.getName()%></option>
                                     <%}%>
                                 </SELECT>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                    <%for (User user : users) {%>
+                                    <input type="hidden" name="id" value="<%=user.getId()%>">
+                                    <%}%>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="pic_name" class="col-form-label">Image</label>
+                                <input type="file" class="form-control" name="profilePic" id="pic_name">
                             </div>
                         </div>
                         <div class="row justify-content-center">

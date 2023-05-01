@@ -37,10 +37,10 @@ public class EditAuthorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Author byId = authorStorage.getById(id);
-        if (byId != null){
-            if (byId.getPicName() != null || byId.getPicName().equalsIgnoreCase("null")){
-                File file = new File(SharedConstants.UPLOAD_FOLDER+byId.getPicName());
-                if (file.exists()){
+        if (byId != null) {
+            if (byId.getPicName() != null || byId.getPicName().equalsIgnoreCase("null")) {
+                File file = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR + byId.getPicName());
+                if (file.exists()) {
                     file.delete();
                 }
             }
@@ -49,16 +49,16 @@ public class EditAuthorServlet extends HttpServlet {
         String picName = null;
         if (profilePicPart != null && profilePicPart.getSize() > 0) {
             picName = System.nanoTime() + "_" + profilePicPart.getSubmittedFileName();
-            profilePicPart.write(SharedConstants.UPLOAD_FOLDER + picName);
+            profilePicPart.write(SharedConstants.UPLOAD_FOLDER_AUTHOR + picName);
         }
-            authorStorage.editAuthor(Author.builder()
-                    .id(Integer.parseInt(req.getParameter("id")))
-                    .name(req.getParameter("name"))
-                    .surname(req.getParameter("surname"))
-                    .email(req.getParameter("email"))
-                    .age(Integer.parseInt(req.getParameter("age")))
-                    .picName(picName)
-                    .build());
+        authorStorage.editAuthor(Author.builder()
+                .id(Integer.parseInt(req.getParameter("id")))
+                .name(req.getParameter("name"))
+                .surname(req.getParameter("surname"))
+                .email(req.getParameter("email"))
+                .age(Integer.parseInt(req.getParameter("age")))
+                .picName(picName)
+                .build());
         resp.sendRedirect("/authors");
     }
 }

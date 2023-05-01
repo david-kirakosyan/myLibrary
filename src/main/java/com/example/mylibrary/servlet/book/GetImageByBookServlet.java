@@ -1,4 +1,4 @@
-package com.example.mylibrary.servlet.author;
+package com.example.mylibrary.servlet.book;
 
 
 import com.example.mylibrary.constants.SharedConstants;
@@ -13,8 +13,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-@WebServlet("/getImage")
-public class GetImageByAuthorServlet extends HttpServlet {
+@WebServlet("/getImageBook")
+public class GetImageByBookServlet extends HttpServlet {
 
 
     @Override
@@ -22,7 +22,7 @@ public class GetImageByAuthorServlet extends HttpServlet {
         String picName = req.getParameter("picName");
 
         // reads input file from an absolute path
-        File imageFile = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR + picName);
+        File imageFile = new File(SharedConstants.UPLOAD_FOLDER_BOOK + picName);
         if (imageFile.exists()) {
             try (FileInputStream inStream = new FileInputStream(imageFile)) {
                 // modifies response

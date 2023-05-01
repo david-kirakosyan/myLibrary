@@ -1,6 +1,7 @@
 <%@ page import="com.example.mylibrary.model.Author" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.mylibrary.model.User" %>
+<%@ page import="com.example.mylibrary.model.UserType" %>
 <!DOCTYPE html>
 <html lang="en" title="Coding design">
 
@@ -20,7 +21,10 @@
 <main class="table">
     <section class="table__header">
         <a href="/home">Back</a>
-        <h1>Authors</h1> <a href="/createAuthor">Create Author</a>
+        <h1>Authors</h1>
+        <% if (user.getUserType() == UserType.ADMIN){%>
+        <a href="/createAuthor">Create Author</a>
+        <%}%>
             <form action="/authors" method="get" id="search-authors" class="input-group">
                 <input type="search" name="keyword" placeholder="Search Data..." value="<%=keyword%>">
                 <img onclick="document.getElementById('search-authors').submit()"  src="../register/tables/images/search.png" alt="">
@@ -40,7 +44,9 @@
                 <th>Surname</th>
                 <th>Email</th>
                 <th>Age</th>
+                <% if (user.getUserType() == UserType.ADMIN){%>
                 <th>Action</th>
+                <%}%>
             </tr>
             </thead>
             <tbody>
@@ -54,16 +60,18 @@
                     <img src="../register/images/difault.jpg" alt="">
                     <%} else {%>
                     <a href="/getImage?picName=<%=author.getPicName()%>"><img
-                            src="/getImage?picName=<%=author.getPicName()%>" width="100"> </a></td>
+                            src="/getImage?picName=<%=author.getPicName()%>"> </a></td>
                 <%}%>
                 <td><%=author.getName()%></td>
                 <td> <%=author.getSurname()%></td>
                 <td><%=author.getEmail()%></td>
                 <td><%=author.getAge()%></td>
+                <% if (user.getUserType() == UserType.ADMIN){%>
                 <td>
                     <a class="status cancelled" href="/removeAuthor?id=<%=author.getId()%>">Delete</a>
                     <a class="status delivered" href="/editAuthor?id=<%=author.getId()%>">Edit</a>
                 </td>
+                <% } %>
             </tr>
             <% } %>
             <% } %>

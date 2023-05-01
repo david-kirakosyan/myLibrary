@@ -38,6 +38,12 @@
                                 <label><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="password" placeholder="Password"/>
                             </div>
+                            <div class="form-group">
+                                <select name="type">
+                                    <option value="USER">USER</option>
+                                    <option value="ADMIN">ADMIN</option>
+                                </select>
+                            </div>
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                             </div>

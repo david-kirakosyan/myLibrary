@@ -5,7 +5,6 @@ import com.example.mylibrary.constants.SharedConstants;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.manager.impl.AuthorStorageImpl;
 import com.example.mylibrary.model.Author;
-import com.example.mylibrary.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -44,7 +43,7 @@ public class CreateAuthorServlet extends HttpServlet {
         String picName = null;
         if (profilePicPart != null && profilePicPart.getSize() > 0) {
             picName = System.nanoTime() + "_" + profilePicPart.getSubmittedFileName();
-            profilePicPart.write(SharedConstants.UPLOAD_FOLDER + picName);
+            profilePicPart.write(SharedConstants.UPLOAD_FOLDER_AUTHOR + picName);
         }
 
             authorStorage.saveAuthor(Author.builder()

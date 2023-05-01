@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.mylibrary.model.Book" %>
+<%@ page import="com.example.mylibrary.model.User" %>
+<%@ page import="com.example.mylibrary.model.UserType" %>
 <!DOCTYPE html>
 <html lang="en" title="Coding design">
 
@@ -11,6 +13,8 @@
     <link rel="stylesheet" href="../register/tables/author.css">
 </head>
 <% List<Book> books = (List<Book>) request.getAttribute("book");
+    User user = (User) session.getAttribute("user");
+    Book bookId = (Book) session.getAttribute("books");
     String keyword = request.getParameter("keyword") == null || request.getParameter("keyword").equals("null")
             ? "" : request.getParameter("keyword");
 %>
@@ -34,26 +38,41 @@
             <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Author name</th>
+                <th>User name</th>
+                <%if (user.getUserType() == UserType.USER){%>
                 <th>Action</th>
+                <%}%>
             </tr>
+
             </thead>
             <tbody>
             <% if (books != null && !books.isEmpty()) {%>
             <% for (Book book : books) { %>
             <tr>
                 <td><%=book.getId()%></td>
+                <td>
+                    <% if (book.getImage() == null || book.getImage().equalsIgnoreCase("null")) { %>
+                    <img src="../register/images/difault.jpg" alt="">
+                    <%} else {%>
+                    <a href="/getImageBook?picName=<%=book.getImage()%>"><img
+                            src="/getImageBook?picName=<%=book.getImage()%>"> </a></td>
+                <%}%>
                 <td><%=book.getTitle()%></td>
                 <td> <%=book.getDescription()%></td>
                 <td><%=book.getPrice()%></td>
-                <td><%=book.getAuthor().getName()%></td>
+                <td><%=book.getAuthor().getName()%> <%=book.getAuthor().getSurname()%></td>
+                <td><%=book.getUser().getName()%> <%=book.getUser().getSurname()%></td>
+                <%if (user.getUserType() == UserType.USER){%>
                 <td>
                     <a class="status cancelled" href="/removeBook?id=<%=book.getId()%>">Delete</a>
                     <a class="status delivered" href="/editBook?id=<%=book.getId()%>">Edit</a>
                 </td>
+                <% } %>
             </tr>
             <% } %>
             <% } %>

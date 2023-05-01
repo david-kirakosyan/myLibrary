@@ -1,7 +1,8 @@
-package com.example.companyemployeeservlet.filter;
+package com.example.mylibrary.filter;
 
-import com.example.companyemployeeservlet.model.User;
-import com.example.companyemployeeservlet.model.UserType;
+
+import com.example.mylibrary.model.User;
+import com.example.mylibrary.model.UserType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/removeCompany", "/removeEmployee", "/updateEmployee", "/updateCompany"})
+@WebFilter(urlPatterns = {"/logout", "/removeAuthor", "/editAuthor", "/createAuthor"})
 public class AdminFilter implements Filter {
 
     @Override

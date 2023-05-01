@@ -20,7 +20,9 @@ public class BookServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String keyword = req.getParameter("keyword");
+
         List<Book> book = null;
         if (keyword == null || keyword.equals("")){
             book = bookStorage.getAllByBook();

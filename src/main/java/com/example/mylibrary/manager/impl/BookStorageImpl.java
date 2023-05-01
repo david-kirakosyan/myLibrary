@@ -3,8 +3,10 @@ package com.example.mylibrary.manager.impl;
 import com.example.mylibrary.db.DBConnectionProvider;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.manager.BookStorage;
+import com.example.mylibrary.manager.UserManager;
 import com.example.mylibrary.model.Author;
 import com.example.mylibrary.model.Book;
+import com.example.mylibrary.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,14 +17,18 @@ public class BookStorageImpl implements BookStorage {
 
     private AuthorStorage authorStorage = new AuthorStorageImpl();
 
+    private UserManager userManager = new UserManagerImpl();
+
     @Override
     public void saveBook(Book book) {
-        String sql = "INSERT INTO my_library.book(title,description,price,author_id) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO book(title,description,price,author_id,user_id, pic_name) VALUES(?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getDescription());
             preparedStatement.setDouble(3, book.getPrice());
             preparedStatement.setInt(4, book.getAuthor().getId());
+            preparedStatement.setInt(5, book.getUser().getId());
+            preparedStatement.setString(6, book.getImage());
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -37,7 +43,7 @@ public class BookStorageImpl implements BookStorage {
     @Override
     public List<Book> getAllByBook() {
         List<Book> bookList = new ArrayList<>();
-        String sql = "SELECT * FROM my_library.book";
+        String sql = "SELECT * FROM book";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -83,13 +89,14 @@ public class BookStorageImpl implements BookStorage {
 
     @Override
     public void editBook(Book book) {
-        String sql = "UPDATE my_library.book SET title=?, descripton=?, ptice=?, authot_Id=? WHERE id=?";
+        String sql = "UPDATE my_library.book SET title=?,description=?,price=?,author_id=?, pic_name=? WHERE id=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getDescription());
             preparedStatement.setDouble(3, book.getPrice());
             preparedStatement.setInt(4, book.getAuthor().getId());
-            preparedStatement.setInt(5, book.getId());
+            preparedStatement.setString(5, book.getImage());
+            preparedStatement.setInt(6, book.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,7 +105,7 @@ public class BookStorageImpl implements BookStorage {
 
     @Override
     public void removeById(int id) {
-        String sql = "DELETE FROM my_library.book WHERE id=?";
+        String sql = "DELETE FROM book WHERE id=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
@@ -108,14 +115,18 @@ public class BookStorageImpl implements BookStorage {
     }
 
     private Book getBookFromResultSet(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("author_id");
-        Author author = authorStorage.getById(id);
+        int authorId = resultSet.getInt("author_id");
+        int userId = resultSet.getInt("user_id");
+        User user = userManager.getById(userId);
+        Author author = authorStorage.getById(authorId);
         return Book.builder()
                 .id(resultSet.getInt("id"))
                 .title(resultSet.getString("title"))
                 .description(resultSet.getString("description"))
                 .price(resultSet.getDouble("price"))
                 .author(author)
+                .user(user)
+                .image(resultSet.getString("pic_name"))
                 .build();
     }
 

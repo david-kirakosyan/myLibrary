@@ -1,6 +1,7 @@
 <%@ page import="com.example.mylibrary.model.Book" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.mylibrary.model.Author" %>
+<%@ page import="com.example.mylibrary.model.User" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,7 +23,9 @@
 </head>
 <body>
 <% List<Author> authors = (List<Author>) request.getAttribute("author");
-    Book book = (Book) request.getAttribute("books");%>
+    Book book = (Book) request.getAttribute("books");
+    List<User> users = (List<User>) request.getAttribute("users");
+%>
 
 <div class="content">
 
@@ -31,7 +34,7 @@
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
                     <a href="/books">Back</a>   <h3 class="text-center">Edit Book</h3>
-                    <form class="mb-5" action="/editBook" method="post">
+                    <form class="mb-5" action="/editBook" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<%=book.getId()%>">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
@@ -55,6 +58,24 @@
                                     <%}%>
                                 </SELECT>
                             </div>
+                            <div class="col-md-6 float-right form-group mb-3">
+                                <% if (book.getImage() == null || book.getImage().equalsIgnoreCase("null")) { %>
+                                <img style="width: 100px" src="../register/images/difault.jpg" alt="">
+                                <%} else {%>
+                                <img style="width: 100px" src="/getImageBook?picName=<%=book.getImage()%>">
+                                <%}%>
+                                <img src="" alt="" class="img-responsive">
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="pic_name" class="col-form-label">Image</label>
+                                <input type="file" class="form-control" name="picName" id="pic_name"
+                                       value="<%=book.getImage()%>" alt="">
+                            </div>
+<%--                            <div class="col-md-6 form-group mb-3">--%>
+<%--                                <%for (User user : users) {%>--%>
+<%--                                <input type="hidden" name="id" value="<%=user.getId()%>">--%>
+<%--                                <%}%>--%>
+<%--                            </div>--%>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-5 form-group text-center">

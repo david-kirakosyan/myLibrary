@@ -4,6 +4,7 @@ package com.example.mylibrary.servlet;
 import com.example.mylibrary.manager.UserManager;
 import com.example.mylibrary.manager.impl.UserManagerImpl;
 import com.example.mylibrary.model.User;
+import com.example.mylibrary.model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +28,7 @@ public class RegisterServlet extends HttpServlet {
                     .surname(req.getParameter("surname"))
                     .email(email)
                     .password(req.getParameter("password"))
+                            .userType(UserType.valueOf(req.getParameter("type")))
                     .build());
 
         }

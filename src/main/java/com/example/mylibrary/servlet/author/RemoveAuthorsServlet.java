@@ -24,7 +24,7 @@ public class RemoveAuthorsServlet extends HttpServlet {
         Author byId = authorStorage.getById(id);
         if (byId != null) {
             if (byId.getPicName() != null || byId.getPicName().equalsIgnoreCase("null")) {
-                File file = new File(SharedConstants.UPLOAD_FOLDER + byId.getPicName());
+                File file = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR + byId.getPicName());
                 if (file.exists()) {
                     file.delete();
                 }

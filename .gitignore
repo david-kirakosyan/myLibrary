@@ -37,7 +37,9 @@ build/
 ### Mac OS ###
 .DS_Store
 
-.idea
-.mvn
-${project.build.directory}
-mvnw.cmd
+/out/
+/.idea/
+/.${project.build.directory}/
+/.mvn/
+/mvnw/
+/mvnw.cmd/

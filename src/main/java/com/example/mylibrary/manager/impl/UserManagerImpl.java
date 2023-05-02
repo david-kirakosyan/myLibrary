@@ -2,7 +2,6 @@ package com.example.mylibrary.manager.impl;
 
 import com.example.mylibrary.db.DBConnectionProvider;
 import com.example.mylibrary.manager.UserManager;
-import com.example.mylibrary.model.Book;
 import com.example.mylibrary.model.User;
 import com.example.mylibrary.model.UserType;
 

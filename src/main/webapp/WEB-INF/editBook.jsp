@@ -24,7 +24,6 @@
 <body>
 <% List<Author> authors = (List<Author>) request.getAttribute("author");
     Book book = (Book) request.getAttribute("books");
-    List<User> users = (List<User>) request.getAttribute("users");
 %>
 
 <div class="content">

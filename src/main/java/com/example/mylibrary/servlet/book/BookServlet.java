@@ -4,8 +4,6 @@ package com.example.mylibrary.servlet.book;
 import com.example.mylibrary.manager.BookStorage;
 import com.example.mylibrary.manager.impl.BookStorageImpl;
 import com.example.mylibrary.model.Book;
-import com.example.mylibrary.model.User;
-import com.example.mylibrary.model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.FileStore;
 import java.util.List;
 
 @WebServlet("/books")

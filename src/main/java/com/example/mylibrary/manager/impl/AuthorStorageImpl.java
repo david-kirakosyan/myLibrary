@@ -3,8 +3,6 @@ package com.example.mylibrary.manager.impl;
 import com.example.mylibrary.db.DBConnectionProvider;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.model.Author;
-import com.example.mylibrary.model.Book;
-import com.example.mylibrary.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -94,6 +92,7 @@ public class AuthorStorageImpl implements AuthorStorage {
         }
     }
 
+    @Override
     public List<Author> search(String keyword) {
         List<Author> employeeList = new ArrayList<>();
         String sql = "SELECT * FROM author WHERE name LIKE  ? OR  surname LIKE ?";

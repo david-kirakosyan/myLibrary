@@ -4,8 +4,6 @@ package com.example.mylibrary.servlet;
 import com.example.mylibrary.manager.BookStorage;
 import com.example.mylibrary.manager.impl.BookStorageImpl;
 import com.example.mylibrary.model.Book;
-import com.example.mylibrary.model.User;
-import com.example.mylibrary.model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +28,7 @@ public class UserBooksServlet extends HttpServlet {
             book = bookStorage.search(keyword);
         }
         req.setAttribute("book", book);
-        req.getRequestDispatcher("WEB-INF/users.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/myBooks.jsp").forward(req, resp);
     }
 }
 

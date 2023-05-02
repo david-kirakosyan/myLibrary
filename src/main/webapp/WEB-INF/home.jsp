@@ -16,7 +16,7 @@ Welcome <%=user.getName()%> <%=user.getSurname()%>
 <nav>
     <a href="/users">My Books</a>
     <a href="/authors">Authors</a>
-    <a href="/books">Books</a>
+    <a href="/books">All Books</a>
     <a href="/logout">Logout</a>
 </nav>
 

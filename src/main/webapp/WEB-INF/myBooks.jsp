@@ -22,7 +22,7 @@
 <main class="table">
     <section class="table__header">
         <a href="/home">Back</a>
-        <h1>My Books</h1>
+        <h1>My Books</h1> <a href="/createBook">Create Book</a>
         <form action="/users" method="get" id="search-books" class="input-group">
             <input type="search" name="keyword" placeholder="Search Data..." value="<%=keyword%>">
             <img onclick="document.getElementById('search-books').submit()" src="../register/tables/images/search.png"

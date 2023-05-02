@@ -63,7 +63,7 @@ public class CreateBookServlet extends HttpServlet {
                         .image(picName)
                         .build());
 
-        resp.sendRedirect("/books");
+        resp.sendRedirect("/users");
 
     }
 }

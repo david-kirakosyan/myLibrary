@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-md-6 float-right form-group mb-3">
                                 <% if (book.getImage() == null || book.getImage().equalsIgnoreCase("null")) { %>
-                                <img style="width: 100px" src="../register/images/difault.jpg" alt="">
+                                <img style="width: 100px" src="../register/images/difault-book.png" alt="">
                                 <%} else {%>
                                 <img style="width: 100px" src="/getImageBook?picName=<%=book.getImage()%>">
                                 <%}%>
@@ -71,11 +71,6 @@
                                 <input type="file" class="form-control" name="picName" id="pic_name"
                                        value="<%=book.getImage()%>" alt="">
                             </div>
-<%--                            <div class="col-md-6 form-group mb-3">--%>
-<%--                                <%for (User user : users) {%>--%>
-<%--                                <input type="hidden" name="id" value="<%=user.getId()%>">--%>
-<%--                                <%}%>--%>
-<%--                            </div>--%>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-5 form-group text-center">

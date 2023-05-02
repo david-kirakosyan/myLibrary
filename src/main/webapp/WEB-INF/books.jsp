@@ -55,7 +55,7 @@
                 <td><%=book.getId()%></td>
                 <td>
                     <% if (book.getImage() == null || book.getImage().equalsIgnoreCase("null")) { %>
-                    <img src="../register/images/difault.jpg" alt="">
+                    <img src="../register/images/difault-book.png" alt="">
                     <%} else {%>
                     <a href="/getImageBook?picName=<%=book.getImage()%>"><img
                             src="/getImageBook?picName=<%=book.getImage()%>"> </a></td>

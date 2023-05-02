@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import java.util.Date;
 
 @WebListener
-public class MySessionAttributeListener implements HttpSessionAttributeListener {
+public class MyHttpSessionAttributeListener implements HttpSessionAttributeListener {
 
 
     @Override

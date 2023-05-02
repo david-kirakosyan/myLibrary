@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebListener;
 import java.util.Date;
 
 @WebListener
-public class MyApplicationListener implements ServletContextListener {
+public class MyServletContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

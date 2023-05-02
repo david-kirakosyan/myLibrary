@@ -14,7 +14,7 @@
 </head>
 <% List<Book> books = (List<Book>) request.getAttribute("book");
     User user = (User) session.getAttribute("user");
-    Book bookId = (Book) session.getAttribute("book");
+    Book bookId = (Book) session.getAttribute("books");
     String keyword = request.getParameter("keyword") == null || request.getParameter("keyword").equals("null")
             ? "" : request.getParameter("keyword");
 %>
@@ -26,7 +26,8 @@
         <h1>Books</h1> <a href="/createBook">Create Book</a>
         <form action="/books" method="get" id="search-books" class="input-group">
             <input type="search" name="keyword" placeholder="Search Data..." value="<%=keyword%>">
-            <img onclick="document.getElementById('search-books').submit()" src="../register/tables/images/search.png" alt="">
+            <img onclick="document.getElementById('search-books').submit()" src="../register/tables/images/search.png"
+                 alt="">
         </form>
         <div class="export__file">
             <label for="export-file" class="export__file-btn" title="Export File"></label>
@@ -46,13 +47,13 @@
                 <th>User name</th>
                 <th>Action</th>
             </tr>
-
             </thead>
             <tbody>
             <% if (books != null && !books.isEmpty()) {%>
             <% for (Book book : books) { %>
             <tr>
-                <td><%=book.getId()%></td>
+                <td><%=book.getId()%>
+                </td>
                 <td>
                     <% if (book.getImage() == null || book.getImage().equalsIgnoreCase("null")) { %>
                     <img src="../register/images/difault-book.png" alt="">
@@ -60,15 +61,22 @@
                     <a href="/getImageBook?picName=<%=book.getImage()%>"><img
                             src="/getImageBook?picName=<%=book.getImage()%>"> </a></td>
                 <%}%>
-                <td><%=book.getTitle()%></td>
-                <td> <%=book.getDescription()%></td>
-                <td><%=book.getPrice()%></td>
-                <td><%=book.getAuthor().getName()%> <%=book.getAuthor().getSurname()%></td>
-                <td><%=book.getUser().getName()%> <%=book.getUser().getSurname()%></td>
+                <td><%=book.getTitle()%>
+                </td>
+                <td><%=book.getDescription()%>
+                </td>
+                <td><%=book.getPrice()%>
+                </td>
+                <td><%=book.getAuthor().getName()%> <%=book.getAuthor().getSurname()%>
+                </td>
+                <td><%=book.getUser().getName()%> <%=book.getUser().getSurname()%>
+                </td>
+                <% if (book.getUser().getId() == user.getId() && user.getUserType() == UserType.USER) {%>
                 <td>
                     <a class="status cancelled" href="/removeBook?id=<%=book.getId()%>">Delete</a>
                     <a class="status delivered" href="/editBook?id=<%=book.getId()%>">Edit</a>
                 </td>
+                <%}%>
             </tr>
             <% } %>
             <% } %>

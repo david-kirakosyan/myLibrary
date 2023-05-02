@@ -5,6 +5,7 @@ import com.example.mylibrary.manager.BookStorage;
 import com.example.mylibrary.manager.impl.BookStorageImpl;
 import com.example.mylibrary.model.Book;
 import com.example.mylibrary.model.User;
+import com.example.mylibrary.model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,14 +23,15 @@ public class BookServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String keyword = req.getParameter("keyword");
-        List<Book> book = null;
-        if (keyword == null || keyword.equals("")){
-            book = bookStorage.getAllByBook();
-        } else {
-            book = bookStorage.search(keyword);
+            String keyword = req.getParameter("keyword");
+            List<Book> book = null;
+            if (keyword == null || keyword.equals("")) {
+                book = bookStorage.getAllByBook();
+            } else {
+                book = bookStorage.search(keyword);
+            }
+            req.setAttribute("book", book);
+            req.getRequestDispatcher("WEB-INF/books.jsp").forward(req, resp);
         }
-        req.setAttribute("book", book);
-        req.getRequestDispatcher("WEB-INF/books.jsp").forward(req, resp);
     }
-}
+

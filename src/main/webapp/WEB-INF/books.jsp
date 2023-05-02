@@ -17,7 +17,6 @@
     String keyword = request.getParameter("keyword") == null || request.getParameter("keyword").equals("null")
             ? "" : request.getParameter("keyword");
 %>
-%>
 <body>
 <main class="table">
     <section class="table__header">

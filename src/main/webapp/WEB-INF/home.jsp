@@ -14,6 +14,7 @@
 <% User user = (User) session.getAttribute("user"); %>
 Welcome <%=user.getName()%> <%=user.getSurname()%>
 <nav>
+    <a href="/users">My Books</a>
     <a href="/authors">Authors</a>
     <a href="/books">Books</a>
     <a href="/logout">Logout</a>

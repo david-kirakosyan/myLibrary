@@ -13,6 +13,8 @@ public interface BookStorage {
 
     List<Book> search(String keyword);
 
+    List<Book> getAllByUserBook(int user_id);
+
     void editBook(Book book);
 
     void removeById(int id);

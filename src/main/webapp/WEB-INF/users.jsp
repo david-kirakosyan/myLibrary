@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Book</title>
+    <title>My Book</title>
     <link rel="stylesheet" href="../register/tables/author.css">
 </head>
 <% List<Book> books = (List<Book>) request.getAttribute("book");
@@ -22,8 +22,8 @@
 <main class="table">
     <section class="table__header">
         <a href="/home">Back</a>
-        <h1>Books</h1> <a href="/createBook">Create Book</a>
-        <form action="/books" method="get" id="search-books" class="input-group">
+        <h1>My Books</h1>
+        <form action="/users" method="get" id="search-books" class="input-group">
             <input type="search" name="keyword" placeholder="Search Data..." value="<%=keyword%>">
             <img onclick="document.getElementById('search-books').submit()" src="../register/tables/images/search.png"
                  alt="">
@@ -44,14 +44,13 @@
                 <th>Price</th>
                 <th>Author name</th>
                 <th>User name</th>
-                <% if (user.getUserType() == UserType.ADMIN){%>
                 <th>Action</th>
-                <%}%>
             </tr>
             </thead>
             <tbody>
             <% if (books != null && !books.isEmpty()) {%>
             <% for (Book book : books) { %>
+            <% if (user.getId() == book.getUser().getId()){%>
             <tr>
                 <td><%=book.getId()%>
                 </td>
@@ -72,13 +71,12 @@
                 </td>
                 <td><%=book.getUser().getName()%> <%=book.getUser().getSurname()%>
                 </td>
-                <% if (user.getUserType() == UserType.ADMIN){%>
                 <td>
                     <a class="status cancelled" href="/removeBook?id=<%=book.getId()%>">Delete</a>
                     <a class="status delivered" href="/editBook?id=<%=book.getId()%>">Edit</a>
                 </td>
-                <%}%>
             </tr>
+            <% } %>
             <% } %>
             <% } %>
             </tbody>

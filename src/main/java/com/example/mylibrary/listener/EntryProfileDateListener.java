@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSessionListener;
 import java.util.Date;
 
 @WebListener
-public class MyHttpSessionListener implements HttpSessionListener {
+public class EntryProfileDateListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {

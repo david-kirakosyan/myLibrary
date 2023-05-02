@@ -56,6 +56,21 @@ public class BookStorageImpl implements BookStorage {
     }
 
     @Override
+    public List<Book> getAllByUserBook(int user_id) {
+        List<Book> bookList = new ArrayList<>();
+        String sql = "SELECT * FROM book WHERE user_id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                bookList.add(getBookFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookList;
+    }
+
+    @Override
     public Book getById(int id) {
         String sql = "SELECT * FROM my_library.book WHERE id=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

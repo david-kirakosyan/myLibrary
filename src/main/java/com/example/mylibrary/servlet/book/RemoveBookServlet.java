@@ -25,7 +25,12 @@ public class RemoveBookServlet extends HttpServlet {
 
         Book byId = bookStorage.getById(id);
         if (byId != null) {
-            if (byId.getImage() != null || byId.getImage().equalsIgnoreCase("null")) {
+            if (byId.getImage() == null ) {
+                File file = new File(SharedConstants.UPLOAD_FOLDER_BOOK + byId.getImage());
+                if (file.exists()) {
+                    file.delete();
+                }
+            } else if (byId.getImage() != null || byId.getImage().equalsIgnoreCase("null")) {
                 File file = new File(SharedConstants.UPLOAD_FOLDER_BOOK + byId.getImage());
                 if (file.exists()) {
                     file.delete();

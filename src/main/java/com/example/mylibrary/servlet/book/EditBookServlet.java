@@ -54,13 +54,18 @@ public class EditBookServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("user");
         Book byId = bookStorage.getById(id);
         if (byId != null) {
-            if (byId.getImage() != null || byId.getImage().equalsIgnoreCase("null")) {
+            if (byId.getImage() == null ) {
                 File file = new File(SharedConstants.UPLOAD_FOLDER_BOOK + byId.getImage());
                 if (file.exists()) {
                     file.delete();
                 }
+            } else if (byId.getImage() != null || byId.getImage().equalsIgnoreCase("null")) {
+                    File file = new File(SharedConstants.UPLOAD_FOLDER_BOOK + byId.getImage());
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                }
             }
-        }
         Part profilePicPart = req.getPart("picName");
         String picName = null;
         if (profilePicPart != null && profilePicPart.getSize() > 0) {

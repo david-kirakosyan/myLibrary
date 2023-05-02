@@ -38,7 +38,12 @@ public class EditAuthorServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Author byId = authorStorage.getById(id);
         if (byId != null) {
-            if (byId.getPicName() != null || byId.getPicName().equalsIgnoreCase("null")) {
+            if (byId.getPicName() == null ) {
+                File file = new File(SharedConstants.UPLOAD_FOLDER_BOOK + byId.getPicName());
+                if (file.exists()) {
+                    file.delete();
+                }
+            } else if (byId.getPicName() != null || byId.getPicName().equalsIgnoreCase("null")) {
                 File file = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR + byId.getPicName());
                 if (file.exists()) {
                     file.delete();

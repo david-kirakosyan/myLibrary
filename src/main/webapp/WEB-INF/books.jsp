@@ -76,6 +76,11 @@
                     <a class="status cancelled" href="/removeBook?id=<%=book.getId()%>">Delete</a>
                     <a class="status delivered" href="/editBook?id=<%=book.getId()%>">Edit</a>
                 </td>
+                <%} else if (user.getUserType() == UserType.ADMIN){%>
+                <td>
+                    <a class="status cancelled" href="/removeBook?id=<%=book.getId()%>">Delete</a>
+                    <a class="status delivered" href="/editBook?id=<%=book.getId()%>">Edit</a>
+                </td>
                 <%}%>
             </tr>
             <% } %>

@@ -80,7 +80,6 @@ public class UserManagerImpl implements UserManager {
         }
         return null;
     }
-
     @Override
     public User getById(int id) {
         String sql = "SELECT * FROM user WHERE id=?";

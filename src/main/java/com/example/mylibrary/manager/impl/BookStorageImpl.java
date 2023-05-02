@@ -71,7 +71,7 @@ public class BookStorageImpl implements BookStorage {
     }
 
     public List<Book> search(String keyword) {
-        List<Book> employeeList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
         String sql = "SELECT * FROM book WHERE title LIKE  ? OR  description LIKE ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             keyword = "%" + keyword + "%";
@@ -79,24 +79,25 @@ public class BookStorageImpl implements BookStorage {
             preparedStatement.setString(2, keyword);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                employeeList.add(getBookFromResultSet(resultSet));
+                bookList.add(getBookFromResultSet(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return employeeList;
+        return bookList;
     }
 
     @Override
     public void editBook(Book book) {
-        String sql = "UPDATE my_library.book SET title=?,description=?,price=?,author_id=?, pic_name=? WHERE id=?";
+        String sql = "UPDATE my_library.book SET title=?,description=?,price=?,author_id=?, user_id=?, pic_name=? WHERE id=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getDescription());
             preparedStatement.setDouble(3, book.getPrice());
             preparedStatement.setInt(4, book.getAuthor().getId());
-            preparedStatement.setString(5, book.getImage());
-            preparedStatement.setInt(6, book.getId());
+            preparedStatement.setInt(5, book.getUser().getId());
+            preparedStatement.setString(6, book.getImage());
+            preparedStatement.setInt(7, book.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

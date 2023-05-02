@@ -14,7 +14,7 @@
 </head>
 <% List<Book> books = (List<Book>) request.getAttribute("book");
     User user = (User) session.getAttribute("user");
-    Book bookId = (Book) session.getAttribute("books");
+    Book bookId = (Book) session.getAttribute("book");
     String keyword = request.getParameter("keyword") == null || request.getParameter("keyword").equals("null")
             ? "" : request.getParameter("keyword");
 %>
@@ -44,9 +44,7 @@
                 <th>Price</th>
                 <th>Author name</th>
                 <th>User name</th>
-                <%if (user.getUserType() == UserType.USER){%>
                 <th>Action</th>
-                <%}%>
             </tr>
 
             </thead>
@@ -67,12 +65,10 @@
                 <td><%=book.getPrice()%></td>
                 <td><%=book.getAuthor().getName()%> <%=book.getAuthor().getSurname()%></td>
                 <td><%=book.getUser().getName()%> <%=book.getUser().getSurname()%></td>
-                <%if (user.getUserType() == UserType.USER){%>
                 <td>
                     <a class="status cancelled" href="/removeBook?id=<%=book.getId()%>">Delete</a>
                     <a class="status delivered" href="/editBook?id=<%=book.getId()%>">Edit</a>
                 </td>
-                <% } %>
             </tr>
             <% } %>
             <% } %>

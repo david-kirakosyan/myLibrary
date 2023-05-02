@@ -47,25 +47,22 @@ public class CreateBookServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        int id = Integer.parseInt(req.getParameter("id"));
-        User user = userManager.getById(id);
+        User user = (User) req.getSession().getAttribute("user");
         Part profilePicPart = req.getPart("profilePic");
         String picName = null;
         if (profilePicPart != null && profilePicPart.getSize() > 0) {
             picName = System.nanoTime() + "_" + profilePicPart.getSubmittedFileName();
             profilePicPart.write(SharedConstants.UPLOAD_FOLDER_BOOK + picName);
         }
-        if (user != null) {
-            bookStorage.saveBook(Book.builder()
-                    .title(req.getParameter("title"))
-                    .description(req.getParameter("description"))
-                    .price(Double.parseDouble(req.getParameter("price")))
-                    .author(authorStorage.getById(Integer.parseInt(req.getParameter("author_id"))))
-                    .user(user)
-                    .image(picName)
-                    .build());
+                bookStorage.saveBook(Book.builder()
+                        .title(req.getParameter("title"))
+                        .description(req.getParameter("description"))
+                        .price(Double.parseDouble(req.getParameter("price")))
+                        .author(authorStorage.getById(Integer.parseInt(req.getParameter("author_id"))))
+                        .user(userManager.getById(user.getId()))
+                        .image(picName)
+                        .build());
 
-        }
         resp.sendRedirect("/books");
 
     }

@@ -25,6 +25,8 @@ public class EditAuthorServlet extends HttpServlet {
 
     private AuthorStorage authorStorage = new AuthorStorageImpl();
 
+    private static final File UPLOAD_AUTHOR = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -38,13 +40,12 @@ public class EditAuthorServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Author byId = authorStorage.getById(id);
         if (byId != null) {
-            if (byId.getPicName() == null ) {
-                File file = new File(SharedConstants.UPLOAD_FOLDER_BOOK + byId.getPicName());
+            File file = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR + byId.getPicName());
+            if (byId.getPicName() == null) {
                 if (file.exists()) {
                     file.delete();
                 }
             } else if (byId.getPicName() != null || byId.getPicName().equalsIgnoreCase("null")) {
-                File file = new File(SharedConstants.UPLOAD_FOLDER_AUTHOR + byId.getPicName());
                 if (file.exists()) {
                     file.delete();
                 }

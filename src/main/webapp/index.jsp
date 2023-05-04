@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="register/css/style.css">
 </head>
 <body>
+<% String msg = (String) request.getAttribute("msg"); %>
     <div class="main">
         <!-- Sing in  Form -->
         <section class="sign-in">
@@ -25,13 +26,17 @@
                     <div class="signin-form">
                         <h2 class="form-title">Sign up</h2>
                         <form method="post" action="/login" class="register-form" id="login-form">
+                            <% if (msg != null) {%>
+                            <samp style="color: red"><%=msg%>
+                            </samp>
+                            <%}%>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Name"/>
+                                <input type="email" name="email" id="email" placeholder="Your Email" required/>
                             </div>
                             <div class="form-group">
                                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="password" placeholder="Password"/>
+                                <input type="password" name="password" id="password" placeholder="Password" required/>
                             </div>
                             <div class="form-group form-button">
                                 <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>

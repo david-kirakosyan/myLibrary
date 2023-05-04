@@ -18,7 +18,7 @@
     <title>Add Author</title>
 </head>
 <body>
-
+<% String msg = (String) request.getAttribute("msg"); %>
 
 <div class="content">
 
@@ -27,25 +27,29 @@
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
                     <a href="/authors">Back</a>  <h3 class="text-center">Add Author</h3>
+                    <% if (msg != null) {%>
+                    <samp style="color: red"><%=msg%>
+                    </samp>
+                    <%}%>
                     <form class="mb-5" action="/createAuthor" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
                                 <label for="name" class="col-form-label">Name</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Your Name">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="surname" class="col-form-label">Surname</label>
-                                <input type="text" class="form-control" name="surname" id="surname" placeholder="Your Surname">
+                                <input type="text" class="form-control" name="surname" id="surname" placeholder="Your Surname" required>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="email" class="col-form-label">Email</label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="Your email">
+                                       placeholder="Your email" required>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="age" class="col-form-label">Age</label>
                                 <input type="number" class="form-control" name="age" id="age"
-                                       placeholder="Your Age">
+                                       placeholder="Your Age" required>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="pic_name" class="col-form-label">Image</label>

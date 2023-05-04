@@ -54,16 +54,30 @@ public class CreateBookServlet extends HttpServlet {
             picName = System.nanoTime() + "_" + profilePicPart.getSubmittedFileName();
             profilePicPart.write(SharedConstants.UPLOAD_FOLDER_BOOK + picName);
         }
+        String title = req.getParameter("title");
+        double price = Double.parseDouble(req.getParameter("price"));
+        String msg = "";
+        if (title == null || title.trim().equals("")) {
+            msg += "Title is required<br>";
+        }
+        if (price <= 0.0) {
+            msg += "Price is less than 0 <br>";
+        }
+        if (msg.equals("")) {
+
                 bookStorage.saveBook(Book.builder()
-                        .title(req.getParameter("title"))
+                        .title(title)
                         .description(req.getParameter("description"))
-                        .price(Double.parseDouble(req.getParameter("price")))
+                        .price(price)
                         .author(authorStorage.getById(Integer.parseInt(req.getParameter("author_id"))))
                         .user(userManager.getById(user.getId()))
                         .image(picName)
                         .build());
 
-        resp.sendRedirect("/users");
-
+                resp.sendRedirect("/users");
+        }else {
+            req.setAttribute("msg", msg);
+            req.getRequestDispatcher("/WEB-INF/createBook.jsp").forward(req, resp);
+        }
     }
 }

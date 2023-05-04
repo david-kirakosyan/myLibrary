@@ -18,7 +18,9 @@
 
     <title>Add Author</title>
 </head>
-<% Author author = (Author) request.getAttribute("author"); %>
+<% Author author = (Author) request.getAttribute("author");
+    String msg = (String) request.getAttribute("msg");
+%>
 <body>
 
 
@@ -29,6 +31,10 @@
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
                     <a href="/authors">Back</a>  <h3 class="text-center">Edit Author</h3>
+                    <% if (msg != null) {%>
+                    <samp style="color: red"><%=msg%>
+                    </samp>
+                    <%}%>
                     <form class="mb-5" action="/editAuthor" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<%=author.getId()%>">
                         <div class="row">

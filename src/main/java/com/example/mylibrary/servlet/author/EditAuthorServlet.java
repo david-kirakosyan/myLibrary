@@ -4,6 +4,7 @@ import com.example.mylibrary.constants.SharedConstants;
 import com.example.mylibrary.manager.AuthorStorage;
 import com.example.mylibrary.manager.impl.AuthorStorageImpl;
 import com.example.mylibrary.model.Author;
+import com.example.mylibrary.util.EmailUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -51,21 +52,45 @@ public class EditAuthorServlet extends HttpServlet {
                 }
             }
         }
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
+        String email = req.getParameter("email");
+        int age = Integer.parseInt(req.getParameter("age"));
         Part profilePicPart = req.getPart("profilePic");
         String picName = null;
         if (profilePicPart != null && profilePicPart.getSize() > 0) {
             picName = System.nanoTime() + "_" + profilePicPart.getSubmittedFileName();
             profilePicPart.write(SharedConstants.UPLOAD_FOLDER_AUTHOR + picName);
         }
-        authorStorage.editAuthor(Author.builder()
-                .id(Integer.parseInt(req.getParameter("id")))
-                .name(req.getParameter("name"))
-                .surname(req.getParameter("surname"))
-                .email(req.getParameter("email"))
-                .age(Integer.parseInt(req.getParameter("age")))
-                .picName(picName)
-                .build());
-        resp.sendRedirect("/authors");
+        String msg = "";
+        if (name == null || name.trim().equals("")) {
+            msg += "Name is required<br>";
+        }
+        if (surname == null || surname.trim().equals("")) {
+            msg += "Surname is required<br>";
+        }
+        if (age <= 10) {
+            msg += "Age is less than 10<br>";
+        }
+        if (email == null || email.trim().equals("")) {
+            msg += "Email is required<br>";
+        } else if (!EmailUtil.patternMatches(email)) {
+            msg += "Email format is incorrect<br>";
+        }
+        if (msg.equals("")) {
+            authorStorage.editAuthor(Author.builder()
+                    .id(id)
+                    .name(name)
+                    .surname(surname)
+                    .email(email)
+                    .age(age)
+                    .picName(picName)
+                    .build());
+            resp.sendRedirect("/authors");
+        }else {
+            req.setAttribute("msg", msg);
+            req.getRequestDispatcher("/WEB-INF/editAuthor.jsp").forward(req, resp);
+        }
     }
 }
 

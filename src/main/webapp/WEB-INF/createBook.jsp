@@ -24,6 +24,7 @@
 <body>
 <% List<Author> authors = (List<Author>) request.getAttribute("author");
 List<User> users = (List<User>) request.getAttribute("user");
+String msg = (String) request.getAttribute("msg");
 %>
 
 <div class="content">
@@ -33,20 +34,24 @@ List<User> users = (List<User>) request.getAttribute("user");
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
                     <a href="/books">Back</a>  <h3 class="text-center">Add Book</h3>
+                    <% if (msg != null) {%>
+                    <samp style="color: red"><%=msg%>
+                    </samp>
+                    <%}%>
                     <form class="mb-5" action="/createBook" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
                                 <label for="title" class="col-form-label">Title</label>
-                                <input type="text" class="form-control" name="title" id="title" placeholder="Your Title">
+                                <input type="text" class="form-control" name="title" id="title" placeholder="Your Title" required>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="description" class="col-form-label">Description</label>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="Your Description">
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Your Description" required>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="price" class="col-form-label">Price</label>
                                 <input type="number" class="form-control" name="price" id="price"
-                                       placeholder="Your Price">
+                                       placeholder="Your Price" required>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="author_id" class="col-form-label">Author name</label>

@@ -13,52 +13,60 @@
     <link rel="stylesheet" href="register/css/style.css">
 </head>
 <body>
-    <div class="main">
+<% String msg = (String) request.getAttribute("msg"); %>
+<div class="main">
 
-        <!-- Sign up form -->
-        <section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
-                        <form action="/register" method="post" class="register-form" id="register-form">
-                            <div class="form-group">
-                                <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" placeholder="Your Name"/>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="surname" placeholder="Your Surname"/>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" placeholder="Your Email"/>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" placeholder="Password"/>
-                            </div>
-                            <div class="form-group">
-                                <select name="type">
-                                    <option value="USER">USER</option>
-                                    <option value="ADMIN">ADMIN</option>
-                                </select>
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
-                            </div>
-                        </form>
+    <!-- Sign up form -->
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form action="/register" method="post" class="register-form" id="register-form">
+                        <% if (msg != null) {%>
+                        <samp style="color: red"><%=msg%>
+                        </samp>
+                        <%}%>
                         <div class="form-group">
-                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                            <label for="agree-term" class="label-agree-term"> <a href="/" class="term-service">Login</a></label>
+                            <label><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="name" placeholder="Your Name" required/>
                         </div>
-                    </div>
-                    <div class="signup-image">
-                        <figure><img src="register/images/signup-image.jpg" alt="sing up image"></figure>
+                        <div class="form-group">
+                            <label><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="surname" placeholder="Your Surname" required/>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" name="email" placeholder="Your Email" required/>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="password" placeholder="Password" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="user"><i class="zmdi zmdi-account material-icons-name">USER</i></label>
+                            <input type="radio" id="user" name="type" value="USER">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin"><i class="zmdi zmdi-account material-icons-name">ADMIN</i></label>
+                            <input type="radio" id="admin" name="type" value="ADMIN">
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term"/>
+                        <label for="agree-term" class="label-agree-term"> <a href="/"
+                                                                             class="term-service">Login</a></label>
                     </div>
                 </div>
+                <div class="signup-image">
+                    <figure><img src="register/images/signup-image.jpg" alt="sing up image"></figure>
+                </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

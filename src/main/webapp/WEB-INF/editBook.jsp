@@ -24,6 +24,7 @@
 <body>
 <% List<Author> authors = (List<Author>) request.getAttribute("author");
     Book book = (Book) request.getAttribute("books");
+    String msg = (String) request.getAttribute("msg");
 %>
 
 <div class="content">
@@ -33,6 +34,10 @@
             <div class="col-md-7">
                 <div class="form h-100 contact-wrap p-5">
                     <a href="/books">Back</a>   <h3 class="text-center">Edit Book</h3>
+                    <% if (msg != null) {%>
+                    <samp style="color: red"><%=msg%>
+                    </samp>
+                    <%}%>
                     <form class="mb-5" action="/editBook" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<%=book.getId()%>">
                         <div class="row">
